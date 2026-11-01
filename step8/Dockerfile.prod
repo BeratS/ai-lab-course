@@ -1,0 +1,34 @@
+# Production image for the RAG API.
+# Build from the ai-lab folder:  docker build -f step8/Dockerfile.prod -t ai-lab-api .
+FROM python:3.12-slim
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
+
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv \
+    UV_LINK_MODE=copy \
+    PYTHONUNBUFFERED=1 \
+    PATH="/opt/venv/bin:$PATH"
+
+WORKDIR /app
+
+# Dependencies first (cached until pyproject.toml changes)
+COPY pyproject.toml ./
+RUN uv sync --no-install-project
+
+# Copy ONLY the code the API needs (not the whole lab, never .env)
+COPY step4/rag_common.py step4/
+COPY step5/graph_rag.py step5/
+COPY step7/tracing.py step7/
+COPY step8/api.py step8/
+
+# Don't run as root in production
+RUN useradd --create-home appuser && mkdir -p /app/.cache && chown -R appuser /app
+USER appuser
+
+# Download the embedding model at build time, so containers start fast
+RUN python -c "import sys; sys.path.insert(0, 'step4'); from rag_common import embed; embed(['warmup'])"
+
+WORKDIR /app/step8
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

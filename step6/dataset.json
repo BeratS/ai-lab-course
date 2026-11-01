@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ship-kosovo",
+    "question": "How much is shipping to Kosovo?",
+    "answerable": true,
+    "expected_facts": "Shipping to Kosovo costs 400 MKD (any order size) and takes 4 to 6 working days.",
+    "must_contain": [["400"]],
+    "sources": ["shipping.md"]
+  },
+  {
+    "id": "ship-mk-time",
+    "question": "How long does delivery take within North Macedonia?",
+    "answerable": true,
+    "expected_facts": "2 to 3 working days.",
+    "must_contain": [["2"], ["3"]],
+    "sources": ["shipping.md"]
+  },
+  {
+    "id": "ship-free",
+    "question": "Is shipping free in North Macedonia?",
+    "answerable": true,
+    "expected_facts": "Only for orders over 3,000 MKD; otherwise shipping costs 150 MKD.",
+    "must_contain": [["3,000", "3000", "3.000"]],
+    "sources": ["shipping.md"]
+  },
+  {
+    "id": "ship-de-mk",
+    "question": "Колку чини достава до Германија?",
+    "answerable": true,
+    "expected_facts": "Germany is in the EU: shipping costs 15 EUR and takes 7 to 10 working days; customs fees, if any, are paid by the customer. The answer should be in Macedonian.",
+    "must_contain": [["15"]],
+    "sources": ["shipping.md"]
+  },
+  {
+    "id": "return-days-sq",
+    "question": "Sa ditë kam kohë për ta kthyer një fustan?",
+    "answerable": true,
+    "expected_facts": "14 days from receiving the order; the product must be unused, unwashed and with the original label. The answer should be in Albanian.",
+    "must_contain": [["14"]],
+    "sources": ["kthimi.md"]
+  },
+  {
+    "id": "return-tailored",
+    "question": "Can I return a custom-tailored dress?",
+    "answerable": true,
+    "expected_facts": "No. Dresses tailored to your measurements cannot be returned unless they are defective.",
+    "must_contain": [],
+    "sources": ["kthimi.md"]
+  },
+  {
+    "id": "pay-card-sq",
+    "question": "A mund të paguaj me kartelë?",
+    "answerable": true,
+    "expected_facts": "Yes, by payment card (Visa and Mastercard). The answer should be in Albanian.",
+    "must_contain": [["Visa", "Mastercard"]],
+    "sources": ["plakjanje.md"]
+  },
+  {
+    "id": "pay-cod-albania",
+    "question": "Can I pay cash on delivery if I live in Albania?",
+    "answerable": true,
+    "expected_facts": "No. Cash on delivery is only available for orders within North Macedonia. Card and bank transfer are available.",
+    "must_contain": [],
+    "sources": ["plakjanje.md"]
+  },
+  {
+    "id": "size-waist",
+    "question": "My waist is 70 cm. Which size should I order?",
+    "answerable": true,
+    "expected_facts": "Size M (waist 70 cm).",
+    "must_contain": [],
+    "sources": ["sizes.md"]
+  },
+  {
+    "id": "multi-tailored-kosovo",
+    "question": "I ordered a tailored dress to be delivered to Kosovo. How long until it arrives?",
+    "answerable": true,
+    "expected_facts": "Kosovo delivery takes 4 to 6 working days, and custom tailoring adds 7 working days, so about 11 to 13 working days in total.",
+    "must_contain": [["11"], ["13"]],
+    "sources": ["shipping.md", "sizes.md"]
+  },
+  {
+    "id": "no-store-tirana",
+    "question": "Do you have a store in Tirana?",
+    "answerable": false,
+    "expected_facts": "The documents do not mention a store in Tirana. The answer must not claim that a store exists or definitely does not exist.",
+    "must_contain": [],
+    "sources": []
+  },
+  {
+    "id": "no-mens-suits",
+    "question": "Do you sell men's suits?",
+    "answerable": false,
+    "expected_facts": "The documents do not say anything about men's suits. The answer must not invent products.",
+    "must_contain": [],
+    "sources": []
+  }
+]

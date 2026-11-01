@@ -1,0 +1,24 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	rewrite_query(rewrite_query)
+	retrieve(retrieve)
+	grade_chunks(grade_chunks)
+	generate(generate)
+	give_up(give_up)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> rewrite_query;
+	grade_chunks -.-> generate;
+	grade_chunks -.-> give_up;
+	grade_chunks -.-> rewrite_query;
+	retrieve --> grade_chunks;
+	rewrite_query --> retrieve;
+	generate --> __end__;
+	give_up --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

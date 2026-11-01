@@ -1,0 +1,232 @@
+{
+  "summary": {
+    "label": "baseline-v2",
+    "pass_rate": "11/12 (92%)",
+    "correct": "12/12 (100%)",
+    "faithful": "11/12 (92%)",
+    "keywords": "7/7 (100%)",
+    "sources": "10/10 (100%)",
+    "avg_seconds": 4.7
+  },
+  "results": [
+    {
+      "id": "ship-kosovo",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 5.4,
+      "reason": "The answer states 400 MKD for any order size and 4 to 6 working days, matching the expected facts and the shipping.md source.",
+      "answer": "Shipping to Kosovo costs 400 MKD for any order size, and delivery takes 4 to 6 working days [1][2].",
+      "trace": [
+        "rewrite #1: 'shipping cost to Kosovo'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0, 1] of 6 (Chunk 0 states shipping to Kosovo and Albania costs 400 MKD for any order size; chunk 1 repeats this in its overlapping text.)",
+        "generate: used 2 chunks"
+      ]
+    },
+    {
+      "id": "ship-mk-time",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 3.6,
+      "reason": "The answer states 2 to 3 working days as expected, and the extra shipping cost details (150 MKD, free over 3,000 MKD) are directly supported by the source.",
+      "answer": "Delivery within North Macedonia takes 2 to 3 working days [1]. Shipping costs 150 MKD, and orders over 3,000 MKD ship for free [1].",
+      "trace": [
+        "rewrite #1: 'delivery time North Macedonia'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [1] of 6 (Chunk 1 states delivery within North Macedonia takes 2 to 3 working days.)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "ship-free",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 3.6,
+      "reason": "The answer states free shipping only for orders over 3,000 MKD and a 150 MKD fee otherwise, and the delivery time of 2 to 3 working days is also supported by the source.",
+      "answer": "Yes, but only on larger orders. Shipping within North Macedonia is free for orders over 3,000 MKD. For orders below that amount, shipping costs 150 MKD, and delivery takes 2 to 3 working days [1].",
+      "trace": [
+        "rewrite #1: 'free shipping North Macedonia'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [1] of 6 (Chunk 1 states that delivery within North Macedonia costs 150 MKD but orders over 3,000 MKD ship for free.)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "ship-de-mk",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 5.2,
+      "reason": "The answer is in Macedonian and states 15 EUR, 7 to 10 working days, and that the customer pays any customs fees, all supported by the EU section of the sources; the tracking and 14:00 cutoff details are also in the sources.",
+      "answer": "Достава до Германија (земја членка на ЕУ) чини 15 EUR [1]. Времето на испорака е 7 до 10 работни дена. Ако има царински такси, ги плаќа купувачот [1].\n\nОткако ќе ја испратиме нарачката, по е-пошта добивате број за следење. Нарачките направени по 14:00 се испраќаат следниот работен ден [1].",
+      "trace": [
+        "rewrite #1: 'цена на достава до Германија'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0, 3] of 6 (Germany is an EU country, and these chunks state EU delivery costs 15 EUR (takes 7 to 10 working days), with the EU section header in chunk 3 linking to chunk 0.)",
+        "generate: used 2 chunks"
+      ]
+    },
+    {
+      "id": "return-days-sq",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 4.9,
+      "reason": "The answer is in Albanian and states 14 days from receipt plus the unused, unwashed, original-label conditions; all extra details (custom dresses, shipping costs) are supported by the source.",
+      "answer": "Keni **14 ditë** kohë për ta kthyer një produkt, duke llogaritur nga dita kur e keni pranuar porosinë [1].\n\nDisa kushte që duhen plotësuar:\n- Produkti duhet të jetë i papërdorur, i palarë dhe me etiketën origjinale [1].\n- Fustanet e qepura me porosi sipas masave tuaja nuk kthehen, përveç nëse kanë defekt [1].\n\nShpenzimet e dërgesës për kthim i paguan klienti, ndërsa në rast defekti i paguajmë ne [1].",
+      "trace": [
+        "rewrite #1: 'afati i kthimit të një fustani sa ditë'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [1] of 6 (Chunk 1 states a product can be returned within 14 days of receiving the order (and notes custom-tailored dresses are not returnable unless defective).)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "return-tailored",
+      "passed": false,
+      "correct": true,
+      "faithful": false,
+      "keywords_ok": null,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 4.4,
+      "reason": "The core facts are right (no returns of tailored dresses unless defective), but the answer invents the name 'Studio Lumi', which is not in the sources, and the 5-day refund claim is framed as specific to defective items when the source applies it to all returns.",
+      "answer": "No, as a general rule you can't. Dresses tailored to your measurements can't be returned, unless they have a defect [1].\n\nIf the dress is defective, a return is possible, and in that case we cover the return shipping costs [1]. For a defective item, the money is refunded to the original payment method within 5 working days after we have received and inspected the product [1].\n\nThe sources don't say how to report a defect or what counts as one. For that, please contact Studio Lumi directly.",
+      "trace": [
+        "rewrite #1: 'custom-tailored dress return policy'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [2] of 6 (Chunk 2 (Albanian) states that dresses tailored to custom measurements cannot be returned unless they are defective.)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "pay-card-sq",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 4.6,
+      "reason": "The answer is in Albanian, confirms card payment with Visa and Mastercard, and the extra advance payment detail (30% for orders over 10,000 denars) is supported by the source.",
+      "answer": "Po, mund të paguani me kartelë. Pranojmë kartela pagese Visa dhe Mastercard [1].\n\nNëse porosia kalon 10.000 denarë, kërkohet një avans prej 30% përpara se të fillojë prodhimi [1].",
+      "trace": [
+        "rewrite #1: 'pagesa me kartelë'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0] of 6 (Chunk 0 states that payment by card (Visa and Mastercard) is accepted.)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "pay-cod-albania",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": null,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 4.9,
+      "reason": "The answer states COD is only for North Macedonia and that card and bank transfer are available, matching the expected facts; the extra details (30% advance over 10,000 denars) are supported by the source, and the note about delivery to Albania being unspecified is accurate.",
+      "answer": "No, cash on delivery is only available for orders delivered within North Macedonia [1], so it wouldn't apply to an address in Albania.\n\nYou can still pay by credit card (Visa or Mastercard) or by bank transfer [1]. For orders over 10,000 denars, a 30% advance is required before production starts [1].\n\nThe sources don't say whether Studio Lumi delivers to Albania or what shipping would involve, so please confirm that with the studio directly.\n\n**Sources:**\n[1] plakjanje.md",
+      "trace": [
+        "rewrite #1: 'cash on delivery payment Albania'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0] of 6 (Chunk 0 states cash on delivery is available only for orders within North Macedonia, so it is not available for Albania.)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "size-waist",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": null,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 4.8,
+      "reason": "The answer states size M for a 70 cm waist, matching the expected fact, and all extra details (bust 88, hips 96, larger size if between sizes, custom tailoring 1,500 MKD and 7 working days) are supported by sizes.md.",
+      "answer": "Based on your waist measurement of 70 cm, size **M** is the match (M waist = 70 cm) [1].\n\nThe size chart also covers bust and hips, so check those too. M is bust 88 cm and hips 96 cm. If your measurements fall between two sizes, we recommend ordering the larger one [1].\n\nIf your measurements don't fit one size neatly, any dress can be custom tailored to your exact measurements. This costs an extra 1,500 MKD and adds 7 working days to delivery [1].",
+      "trace": [
+        "rewrite #1: 'size chart waist 70 cm which size to order'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0] of 6 (Chunk 0 contains the size chart showing a 70 cm waist corresponds to size M, plus advice for between sizes.)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "multi-tailored-kosovo",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": true,
+      "sources_ok": true,
+      "attempts": 1,
+      "seconds": 5.1,
+      "reason": "The answer gives 4-6 working days plus 7 for tailoring, totaling 11-13 working days, and every detail (400 MKD shipping, 1,500 MKD tailoring, tracking email, 14:00 cutoff) is supported by the sources, with the stated uncertainty being accurate.",
+      "answer": "Delivery to Kosovo normally takes 4 to 6 working days [1]. Custom tailoring adds 7 working days to the delivery time [3]. So your tailored dress should arrive in about **11 to 13 working days**.\n\nA few related details:\n- Shipping to Kosovo costs 400 MKD, whatever the order size [1].\n- Tailoring costs an extra 1,500 MKD [3].\n- You'll get a tracking number by email on the day your order ships. Orders placed after 14:00 ship the next working day [2].\n\nThe sources don't say whether the 7 tailoring days start from the order date or from when the order ships. They also don't say whether the cutoff time affects that estimate, so the exact arrival date may vary slightly.",
+      "trace": [
+        "rewrite #1: 'tailored dress delivery time to Kosovo shipping'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0, 1, 5, 2] of 6 (Kosovo delivery takes 4 to 6 working days (chunk 0) and custom tailoring adds 7 working days (chunks 5 and 2), so the total is about 11 to 13 working days; chunk 1 repeats the Kosovo/Albania timing.)",
+        "generate: used 4 chunks"
+      ]
+    },
+    {
+      "id": "no-store-tirana",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": null,
+      "sources_ok": null,
+      "attempts": 1,
+      "seconds": 5.3,
+      "reason": "The answer clearly states the sources don't say whether a Tirana store exists, without claiming it does or doesn't, and the added Albania delivery details (4 to 6 working days, 400 MKD) and Skopje workshop info match the source.",
+      "answer": "The sources don't say whether Studio Lumi has a store in Tirana. They only say that the shop is based in Skopje and that every order ships from our workshop there [1].\n\nWe do deliver to Albania. Delivery takes 4 to 6 working days and costs 400 MKD, whatever the order size [1].\n\nFor information about physical stores, please contact Studio Lumi directly.",
+      "trace": [
+        "rewrite #1: 'store in Tirana'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [0] of 6 (Chunk 0 says Studio Lumi ships all orders from its workshop in Skopje, which implies there is no physical store in Tirana (it only mentions delivery to Albania).)",
+        "generate: used 1 chunks"
+      ]
+    },
+    {
+      "id": "no-mens-suits",
+      "passed": true,
+      "correct": true,
+      "faithful": true,
+      "keywords_ok": null,
+      "sources_ok": null,
+      "attempts": 2,
+      "seconds": 4.7,
+      "reason": "The answer clearly says the information is unavailable, invents no products, and makes no claims beyond the (empty) sources.",
+      "answer": "Sorry, I couldn't find that information in our documents.",
+      "trace": [
+        "rewrite #1: \"men's suits\"",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [] of 6 (None of the chunks mention men's suits; they only cover dresses, shipping, payment, sizes and returns.)",
+        "rewrite #2: 'kostum burrash'",
+        "retrieve: 6 chunks from ['kthimi.md', 'plakjanje.md', 'shipping.md', 'sizes.md']",
+        "grade: kept [] of 6 (None of the chunks mention men's suits; they cover only dresses, sizes, shipping, payment and returns, so the question can't be answered from them.)",
+        "give_up after 2 attempts"
+      ]
+    }
+  ]
+}

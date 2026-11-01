@@ -1,0 +1,58 @@
+services:
+  app:
+    build: .
+    container_name: ai-lab
+    env_file: .env
+    volumes:
+      - .:/app          # live-edit code on your machine, run it in the container
+    stdin_open: true
+    tty: true
+
+  # Vector database for the RAG steps (Step 4+).
+  # Starts only with: docker compose --profile rag up -d
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: ai-lab-db
+    profiles: ["rag"]
+    environment:
+      POSTGRES_USER: ai
+      POSTGRES_PASSWORD: ai
+      POSTGRES_DB: ailab
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Tracing dashboard for Step 7 (OpenTelemetry). UI: http://localhost:6006
+  # Starts only with: docker compose --profile obs up -d
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    container_name: ai-lab-phoenix
+    profiles: ["obs"]
+    environment:
+      PHOENIX_WORKING_DIR: /mnt/data
+      PHOENIX_ENABLE_AUTH: "False"       # no login for the local lab
+    ports:
+      - "6006:6006"     # dashboard + trace collector (HTTP)
+    volumes:
+      - phoenixdata:/mnt/data
+
+  # The RAG API for Step 8. Docs: http://localhost:8000/docs
+  # Starts only with: docker compose --profile rag --profile obs --profile api up -d --build
+  api:
+    build: .
+    container_name: ai-lab-api
+    profiles: ["api"]
+    env_file: .env
+    environment:
+      TRACING: "1"                       # send traces to Phoenix (needs the obs profile)
+    volumes:
+      - .:/app
+    working_dir: /app/step8
+    command: uvicorn api:app --host 0.0.0.0 --port 8000 --reload --reload-dir /app/step8 --reload-dir /app/step5
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
+  phoenixdata:
