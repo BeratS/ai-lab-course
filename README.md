@@ -1,4 +1,4 @@
-# Studio Lumi RAG: a multilingual support assistant, from first API call to production
+# Experimental: RAG: a multilingual support assistant, from first API call to production
 
 A retrieval-augmented support assistant for a (fictional) dress shop in Skopje. It answers customer questions in **English, Albanian and Macedonian** using only the shop's own documents, and says so when the answer isn't in them.
 
