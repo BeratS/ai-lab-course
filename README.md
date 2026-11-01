@@ -15,8 +15,8 @@ flowchart LR
     client["Client<br/>(curl, Swagger UI, Next.js)"] -->|"POST /ask<br/>POST /ask/stream (SSE)"| api
 
     subgraph app["FastAPI service (step8)"]
-        api["api.py<br/>API key check · CORS · warm-up"] --> graph
-        subgraph graph["LangGraph RAG workflow (step5)"]
+        api["api.py<br/>API key check · CORS · warm-up"] --> rag
+        subgraph rag["LangGraph RAG workflow (step5)"]
             direction TB
             rw["rewrite_query"] --> rt["retrieve"] --> gr["grade_chunks"]
             gr -->|"relevant chunks"| gen["generate"]
@@ -28,7 +28,7 @@ flowchart LR
     rt <-->|"top-6 vector search"| db[("PostgreSQL<br/>+ pgvector")]
     rt --- emb["fastembed<br/>multilingual MiniLM<br/>(runs locally)"]
     rw & gr & gen <-->|"structured outputs<br/>(Pydantic)"| claude["Claude API"]
-    graph -.->|"OpenTelemetry spans"| phoenix["Phoenix<br/>tracing dashboard"]
+    rag -.->|"OpenTelemetry spans"| phoenix["Phoenix<br/>tracing dashboard"]
 
     docs["Markdown docs<br/>shipping · returns ·<br/>payment · sizes"] -->|"ingest.py: chunk (500 chars)<br/>embed, store"| db
 ```
